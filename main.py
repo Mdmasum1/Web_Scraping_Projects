@@ -19,4 +19,4 @@ soup = BeautifulSoup(contents, "html.parser")
 #print(soup.a)
 #print(soup.li)
 #Pulls all of the pragraphs
-clearprint(soup.p)
+print(soup.p)
