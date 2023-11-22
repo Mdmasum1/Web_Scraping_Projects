@@ -19,4 +19,25 @@ soup = BeautifulSoup(contents, "html.parser")
 #print(soup.a)
 #print(soup.li)
 #Pulls all of the pragraphs
-print(soup.p)
+#print(soup.p)
+##Finding and selecting  particular element with ###
+#Finding all anchor tag
+all_anchor_tags = soup.find_all(name="a")
+#print(all_anchor_tags)
+#for tag in all_anchor_tags:
+    #print(tag.getText())
+    #print(tag.get("href"))
+
+#when find or isolate specific attribute from whole program
+heading = soup.find(name="h1", id="name")
+#print(heading)
+heading1 = soup.find(name="h3", class_="heading")
+print(heading1)
+#print(heading1.get("class"))
+
+
+
+
+
+
+
