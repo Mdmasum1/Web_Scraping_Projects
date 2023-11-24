@@ -31,12 +31,16 @@ all_anchor_tags = soup.find_all(name="a")
 #when find or isolate specific attribute from whole program
 heading = soup.find(name="h1", id="name")
 #print(heading)
-heading1 = soup.find(name="h3", class_="heading")
+heading1 = soup.find_all(name="h3", class_="heading")
 print(heading1)
 #print(heading1.get("class"))
 
-
-
+#company_url = soup.select_one(selector="p a")
+name = soup.select_one(selector="#name")
+print(name)
+#print(company_url)
+headings = soup.select(".heading")
+print(headings)
 
 
 
