@@ -1,46 +1,64 @@
 
 from bs4 import BeautifulSoup
-#import lxml
 
-with open("website.html") as file:
-    contents = file.read()
+import requests
 
+#part 375: Scraping from live website
+response = requests.get("https://news.ycombinator.com/news")
 
-soup = BeautifulSoup(contents, "html.parser")
+yc_web_page = response.text
 
+soup = BeautifulSoup(yc_web_page, "html.parser")
 #print(soup.title)
-#print(soup.title.name)
-#print(soup.title.string)
+article_tag = soup.find(name="a", rel = "noreferrer")
+article_text = (article_tag.getText())
+print(article_text)
+#article_link = 
+#article_upvote = 
 
-#Display the entire soup obbject
-#Use prettify to have perfect indent
-#print(soup.prettify())
-#display all anchor <a > tags
-#print(soup.a)
-#print(soup.li)
-#Pulls all of the pragraphs
-#print(soup.p)
-##Finding and selecting  particular element with ###
-#Finding all anchor tag
-all_anchor_tags = soup.find_all(name="a")
-#print(all_anchor_tags)
-#for tag in all_anchor_tags:
-    #print(tag.getText())
-    #print(tag.get("href"))
 
-#when find or isolate specific attribute from whole program
-heading = soup.find(name="h1", id="name")
-#print(heading)
-heading1 = soup.find_all(name="h3", class_="heading")
-print(heading1)
-#print(heading1.get("class"))
 
-#company_url = soup.select_one(selector="p a")
-name = soup.select_one(selector="#name")
-print(name)
-#print(company_url)
-headings = soup.select(".heading")
-print(headings)
+# #import lxml
+
+# with open("website.html") as file:
+#     contents = file.read()
+
+
+# soup = BeautifulSoup(contents, "html.parser")
+
+# #print(soup.title)
+# #print(soup.title.name)
+# #print(soup.title.string)
+
+# #Display the entire soup obbject
+# #Use prettify to have perfect indent
+# #print(soup.prettify())
+# #display all anchor <a > tags
+# #print(soup.a)
+# #print(soup.li)
+# #Pulls all of the pragraphs
+# #print(soup.p)
+# ##Finding and selecting  particular element with ###
+# #Finding all anchor tag
+# all_anchor_tags = soup.find_all(name="a")
+# #print(all_anchor_tags)
+# #for tag in all_anchor_tags:
+#     #print(tag.getText())
+#     #print(tag.get("href"))
+
+# #when find or isolate specific attribute from whole program
+# heading = soup.find(name="h1", id="name")
+# #print(heading)
+# heading1 = soup.find_all(name="h3", class_="heading")
+# print(heading1)
+# #print(heading1.get("class"))
+
+# #company_url = soup.select_one(selector="p a")
+# name = soup.select_one(selector="#name")
+# print(name)
+# #print(company_url)
+# headings = soup.select(".heading")
+# print(headings)
 
 
 
