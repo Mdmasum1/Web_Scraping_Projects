@@ -10,13 +10,25 @@ yc_web_page = response.text
 
 soup = BeautifulSoup(yc_web_page, "html.parser")
 #print(soup.title)
-article_tag = soup.find(name="a", rel = "noreferrer")
-article_text = (article_tag.getText())
-print(article_text)
-#article_link = 
-#article_upvote = 
+articles = soup.find_all(name="a", rel = "noreferrer")
 
+#when we find all of the article from the page 
+# we need to use for loop instead of single variable
+article_texts = []
+article_links = []
+for article_tag in articles:
+   text = article_tag.getText()
+   article_texts.append(text)
+   link = article_tag.get("href")
+   article_links.append(link)
 
+#use comprehension list
+article_upvotes =[int(score.getText().split()[0]) for score in soup.find_all(name="span", class_ = "score")]
+
+print(article_texts)
+print(article_links)
+#This is the method how you can hold the number from upvotes
+print(article_upvotes)
 
 # #import lxml
 
