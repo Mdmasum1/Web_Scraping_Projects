@@ -25,10 +25,23 @@ for article_tag in articles:
 #use comprehension list
 article_upvotes =[int(score.getText().split()[0]) for score in soup.find_all(name="span", class_ = "score")]
 
-print(article_texts)
-print(article_links)
-#This is the method how you can hold the number from upvotes
-print(article_upvotes)
+largest_number = max(article_upvotes)
+
+#We can find the lagest number index
+largest_index = article_upvotes.index(largest_number)
+
+print(article_texts[largest_index])
+print(article_links[largest_index])
+
+
+
+#print out that holds the largest number of upvotes
+#print(largest_number)
+
+# print(article_texts)
+# print(article_links)
+# #This is the method how you can hold the number from upvotes
+# print(article_upvotes)
 
 # #import lxml
 
