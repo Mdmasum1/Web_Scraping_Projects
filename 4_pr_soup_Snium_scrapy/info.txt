@@ -1,0 +1,65 @@
+
+*****https://www.udemy.com/course/web-scraping-course-in-python-bs4-selenium-and-scrapy/learn/lecture/29686354#overview
+(this courses from udemy)
+
+##BS4 vs Selenium vs scrapy
+    BeautifulSoup:
+---BeautifulSoup is library that able to pull data from html or xml.
+---It is easy to learn and good for beginner
+---But no java script support and inefficient also 
+it has some dependencies that make it complex between 
+project
+   
+      Selenium:
+----Selenium is library for webscraping of webdriver it assign to render
+mulple web pages, test automation of web application.
+This makes selenium great for webscraping.
+---Works with JavaScript
+---Easier to learn than Scrapy but little slow
+However speed is not priority then Selenium is the top 
+option.
+
+    Scrapy:
+
+---Srapy is the most complete webscraping tool written in python.
+But it is haarder to learn than selenium or BeautifulSoup.
+
+---Srapy is fast , this is one of the biggest advantages
+---Since it is ascyncronus , and for its scrapy spider 
+you do not have to wait for making request one at a time.
+
+---But it can be request in parallel.This increses efficiency
+which make scrapy, memory and cpu efficiency.
+---This is most complete framwork with it you can easily store 
+data into databases , create crawler and do more with 
+Scrapy.
+
+
+
+which one is the best ?
+  ---ans: It is depend on the project and need 
+  ---if it is beginner then BeautifulSoup is best 
+  ---if it is medium size project and JavaScript based ,
+  also speed does not matter that much then this is the
+  best option.
+  ---If it is a big and complex project and speed is a matter
+  then scrapy is the best option.
+
+----Choose your website then which is best fit one of the above to extract data.
+
+
+     HTML for webscraping: Tree Structure
+
+---It's recommended to find elements in this order.
+  1.ID
+  2. Class name
+  3. Tag name, CSS Selector
+  4. Xpath
+
+  
+
+
+
+
+
+
