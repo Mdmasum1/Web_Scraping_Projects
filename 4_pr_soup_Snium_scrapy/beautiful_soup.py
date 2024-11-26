@@ -1,21 +1,34 @@
 
-from bs4 import BeautifulSoup
-import requests
+# from selenium import webdriver
+# from selenium.webdriver.chrome.service import Service
+# from selenium.webdriver.common.by import By
+# from selenium.webdriver.chrome.options import Options
 
-#chromedriver_path = '/workspaces/Web_Scraping_Projects/chromedriver"
-website = 'https://web.archive.org/web/20200518073855/https://www.empireonline.com/movies/features/best-movies-2/'
+# # Set up Chrome WebDriver
+# chrome_options = Options()
+# chrome_options.add_argument("--headless")  # Run browser in headless mode
+# chrome_options.add_argument("--no-sandbox")
+# chrome_options.add_argument("--disable-dev-shm-usage")
 
-#Beautiful Soup: Steps before scraping a website
-#1)Fetch the pages(obtained a resonse object)
-result = requests.get(website)
+# service = Service('/usr/local/bin/chromedriver')  # Update with the path to your chromedriver
+# driver = webdriver.Chrome(service=service, options=chrome_options)
 
-#2) Page content
-content = result.text 
+# # Open the website
+# website = 'https://subslikescript.com/movies'
+# driver.get(website)
 
-#3) Create soup
-soup = BeautifulSoup(content, "html.parser")
+# # Get page source after JavaScript execution
+# content = driver.page_source
 
-print(soup.prettify())
+# # Use BeautifulSoup to parse
+# from bs4 import BeautifulSoup
+# import requests
+
+# soup = BeautifulSoup(content, "html.parser")
+# print(soup.prettify())
+
+# driver.quit()
+
 
 # #Finding element with Beautiful Soup
 # # soup.find(id="specific_id")
@@ -32,3 +45,14 @@ print(soup.prettify())
 # # soup.find_all("h2")
 
 #*********************************************
+'''
+'''
+import cloudscraper
+from bs4 import BeautifulSoup
+
+scraper = cloudscraper.create_scraper()  # Creates a scraper that can bypass Cloudflare
+website = 'https://subslikescript.com/movie/Titanic-120338'
+response = scraper.get(website)
+
+soup = BeautifulSoup(response.text, 'html.parser')
+print(soup.prettify())
