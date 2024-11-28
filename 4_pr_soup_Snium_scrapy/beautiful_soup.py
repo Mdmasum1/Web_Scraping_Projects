@@ -51,16 +51,30 @@ import cloudscraper
 from bs4 import BeautifulSoup
 
 scraper = cloudscraper.create_scraper()  # Creates a scraper that can bypass Cloudflare
-website = 'https://subslikescript.com/movie/Titanic-120338'
+#website = 'https://subslikescript.com/movie/Titanic-120338'
+
+#Scraping the multiple links with the same pages
+website = 'https://subslikescript.com/movies'
 response = scraper.get(website)
 
 soup = BeautifulSoup(response.text, 'html.parser')
 #print(soup.prettify())
 
-title = soup.find('h1').get_text()
-transcript = soup.find('div', class_='full-script').get_text(strip=True, separator=' ')
-#print(transcript)
+box = soup.find('article', class_='main-article')
 
-with open(f'{title}.txt', 'w') as file:
-    file.write(transcript)
+links = []
+#Looping through the each link from the article elements
+for link in box.find_all('a', href=True):
+    links.append(link['href']) #ppending the links to the list
+
+print(links)
+
+#cmmenting out the rest of the code 
+# title = soup.find('h1').get_text()
+# transcript = soup.find('div', class_='full-script').get_text(strip=True, separator=' ')
+# #print(transcript)
+
+# with open(f'{title}.txt', 'w') as file:
+#     file.write(transcript)
+
 
