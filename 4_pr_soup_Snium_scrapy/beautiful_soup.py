@@ -54,12 +54,11 @@ scraper = cloudscraper.create_scraper()  # Creates a scraper that can bypass Clo
 #website = 'https://subslikescript.com/movie/Titanic-120338'
 
 #Scraping the multiple links with the same pages
-website = 'https://subslikescript.com/movies'
+root = 'https://subslikescript.com'
+website = f'{root}/movies'
 response = scraper.get(website)
-
 soup = BeautifulSoup(response.text, 'html.parser')
 #print(soup.prettify())
-
 box = soup.find('article', class_='main-article')
 
 links = []
@@ -69,12 +68,19 @@ for link in box.find_all('a', href=True):
 
 print(links)
 
-#cmmenting out the rest of the code 
-# title = soup.find('h1').get_text()
-# transcript = soup.find('div', class_='full-script').get_text(strip=True, separator=' ')
-# #print(transcript)
+for link in links:
+    website = f'{root}/{link}'
+    response = scraper.get(website)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    #print(soup.prettify())
+    box = soup.find('article', class_='main-article')
 
-# with open(f'{title}.txt', 'w') as file:
-#     file.write(transcript)
+        
+    title = soup.find('h1').get_text()
+    transcript = soup.find('div', class_='full-script').get_text(strip=True, separator=' ')
+    #print(transcript)
+
+    with open(f'{title}.txt', 'w') as file:
+        file.write(transcript)
 
 
