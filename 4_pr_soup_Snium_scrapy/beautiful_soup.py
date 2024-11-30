@@ -55,10 +55,26 @@ scraper = cloudscraper.create_scraper()  # Creates a scraper that can bypass Clo
 
 #Scraping the multiple links with the same pages
 root = 'https://subslikescript.com'
-website = f'{root}/movies'
+#website = f'{root}/movies'
+website = f'{root}/movies_letter-A'
 response = scraper.get(website)
 soup = BeautifulSoup(response.text, 'html.parser')
 #print(soup.prettify())
+
+#Finding the pagination element
+paginatoion = soup.find('ul', class_='pagination')
+pages = paginatoion.find_all('li', class_='page-item')
+last_page = pages[-2].text
+
+
+for page in range(1, int(last_page)+1)[:1]:
+
+    #https://subslikescript.com/movies_letter-A?page=1
+    website = f'{website}?page={page}'
+    response = scraper.get(website)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    
+
 box = soup.find('article', class_='main-article')
 
 links = []
@@ -66,21 +82,33 @@ links = []
 for link in box.find_all('a', href=True):
     links.append(link['href']) #ppending the links to the list
 
-print(links)
+#print(links)
 
 for link in links:
-    website = f'{root}/{link}'
-    response = scraper.get(website)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    #print(soup.prettify())
-    box = soup.find('article', class_='main-article')
 
-        
-    title = soup.find('h1').get_text()
-    transcript = soup.find('div', class_='full-script').get_text(strip=True, separator=' ')
-    #print(transcript)
+    try:
 
-    with open(f'{title}.txt', 'w') as file:
-        file.write(transcript)
+        print(link)
 
+        #website = f'{root}/{link}'
+        response = scraper.get(f'{root}/{link}')
+        soup = BeautifulSoup(response.text, 'html.parser')
+        #print(soup.prettify())
+        box = soup.find('article', class_='main-article')
+
+            
+        title = soup.find('h1').get_text()
+        transcript = soup.find('div', class_='full-script').get_text(strip=True, separator=' ')
+        #print(transcript)
+        with open(f'{title}.txt', 'w') as file:
+
+            file.write(transcript)
+
+
+    except:
+        print('-----print not working-----')
+        print(link)
+
+
+   
 
