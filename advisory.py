@@ -53,14 +53,36 @@ telephone = soup.find('div', style=' margin: 10px 0px 18px').find('div').getText
   <div>Tel:  (907) 225-0833</div>
     29 Main Street"
 '''
-# Locate the div tag with the street address
-#not the telephone number only the street address
-street = soup.find('div', style=' margin: 10px 0px 18px').find('div').find_next_sibling().getText(strip=True)
 
-# Display results
+# Extract address details
+
+# Extract the street address using the <div> containing the full address
+address_div = soup.find('div', style=" margin: 10px 0px 18px")  # Locate the main address <div>
+address_parts = list(address_div.stripped_strings)  # Extract all strings and clean whitespace
+street = address_parts[1]  # Second item contains the street address
+suite = address_parts[2]  # Third item contains the suite number
+
+'''
+ <div style=" margin: 10px 0px 18px"> 
+  <div>Tel:  (907) 225-0833</div>
+    29 Main Street
+    <br>Suite 202<br>
+    <span>Ketchikan, Alaska </span>&nbsp;<span>99901</span>		
+</div>
+
+
+'''
+#based on the above code, the city and state are in the span tag
+# Extract the city and state
+city_state = address_div.find_all('span')[0].getText(strip=True)
+
+# Extract the ZIP code
+zip_code = address_div.find_all('span')[1].getText(strip=True)
+
+
 print(f"Name: {name}")
 print(f"Telephone: {telephone}")
 print(f"Street: {street}")
-# print(f"Suite: {suite}")
-# print(f"City, State: {city_state}")
-# print(f"ZIP Code: {zip_code}")
+print(f"Suite: {suite}")
+print(f"City, State: {city_state}")
+print(f"ZIP Code: {zip_code}")
